@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./k.css" />
+    <link rel="stylesheet" href="./css/bootstrap.css" />
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
+    
+    <title>Time</title>
+</head>
+<body>
+    <div class="k_wrapper">
+        <div class="k_content">
+            <h1>Time Calculation</h1>
+            <a href='./index.html'>
+                <button class="go_back btn">Go Back</button> <br>
+            </a>
+                <p>Enter the following:</p>
+
+            <form>
+                <div class="items">
+                    <label for="population"> Population:</label>
+                    <input type="number" id="population"> <br>
+                </div>
+                <div class="items">
+                    <label for="c">C:</label>
+                    <input type="number" id="c"> <br>
+                </div>
+                <div class="items">
+                    <label for="time"> time:</label>
+                    <input type="number" id="time"> <br>
+                </div>
+
+            </form>
+            <button onclick="print()" class="btn btn-primary mt-3"> SOLVE</button>
+    
+        <p id="k"></p>
+        <p id="solution"></p>
+        <p id="solutionline1"></p>
+        <p id="solutionline2"></p>
+        <p id="solutionline3"></p>
+
+        
+    <script>
+        const pop1 = document.getElementById("population");
+        const cPop1 = document.getElementById("c");
+        const time2 = document.getElementById("time");
+
+
+        function print() { 
+        
+            let kRes = Math.log(pop1.value/cPop1.value)/time.value;
+            document.getElementById("k").innerHTML = "k ="+kRes;
+
+            document.getElementById("solutionline1").innerHTML = "G/D Rate(k) = ln(Population(p) / Constant(c)) / Time(t)";
+            document.getElementById("solutionline2").innerHTML = "G/D Rate(k) = ln(" + pop1.value + "/" + cPop1.value + ") / " + time2.value;
+            document.getElementById("solutionline3").innerHTML = "G/D Rate(k) = " + kRes;
+
+        }
+    </script>
+        </div>
+    </div>
+</body>
+</html>

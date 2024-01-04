@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./c.css" />
+    <link rel="stylesheet" href="./css/bootstrap.css" />
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
+    
+    <title>Constant (C)</title>
+</head>
+<body>
+    <div class="c_wrapper">
+        <div class="c_content">
+            <h1>Constant Calculation</h1>
+            <a href='./index.html'>
+            <button class="go_back btn">Go Back</button> </a><br> <br>
+    
+    
+            <p>Enter the following:</p>
+    <form>
+        <div class="items">
+            <label for="population"> Population:</label>
+            <input type="number" id="population"> <br>
+        </div>
+        <div class="items">
+            <label for="k">K:</label>
+            <input type="number" id="k"> <br>
+        </div>
+        <div class="items">
+            <label for="time">Time:</label>
+            <input type="number" id="time"> <br>
+        </div>
+    </form>
+
+    <button onclick="print()" class="btn btn-primary mt-3"> SOLVE</button>
+
+        <p id="c"></p>
+        <p id="solution"></p>
+
+        <p id="solutionline1"></p>
+        <p id="solutionline2"></p>
+        <p id="solutionline3"></p>
+        
+    <script href="script.js">
+        const pop1 = document.getElementById("population");
+        const gdRate = document.getElementById("k");
+        const time2 = document.getElementById("time");
+
+
+        function print() { 
+        
+            let cRes = pop1.value/Math.exp(gdRate.value*time2.value);
+            document.getElementById("c").innerHTML = "C ="+cRes;
+
+            document.getElementById("solution").innerHTML = "Solution: ";
+            document.getElementById("solutionline1").innerHTML = "Constant(c) = Population(p) / e^(G/D Rate(k) x Time(t))";
+            document.getElementById("solutionline2").innerHTML = "Constant(c) =" + pop1.value + " / e^" + gdRate.value + " x " + time2.value ;
+            document.getElementById("solutionline3").innerHTML = "Constant(c) =" + cRes;
+     }
+    </script>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+a{
+    text-decoration: none;
+}
+body{
+    background-color: gray !important;
+}
+a:hover{
+    text-decoration: none !important;
+    color:white !important;
+}
+.go_back{
+    background-color: blue;
+    color:white;
+    padding: 5px;
+
+}
+.population_wrapper{
+    
+    display: flex;
+   
+    align-items: center;
+    justify-content: center;
+    color:white;
+    padding: 10px;
+   
+}
+
+.population_content{
+    background-color: teal;
+     padding: 5px;
+     display: flex;
+     align-items: center;
+     flex-direction: column;
+     border-radius: 10px;
+     box-shadow: 3px 3px 9px   #00000080 , -2px -2px 5px #FFFFFF80;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    
+}
+.items{
+    display: flex;
+    justify-content: space-between;
+    padding: 0px !important;
+    row-gap: 10px;
+    background-color: none;
+}
+
+button{
+    width: 100px;
+}
+
+/* 
+here is also same design used */

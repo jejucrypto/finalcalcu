@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./initial_population.css" />
+    <link rel="stylesheet" href="./css/bootstrap.css" />
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
+    
+    <title>Document</title>
+</head>
+<body>
+    <div class="population_wrapper">
+        <div class="population_content">
+    
+        <h1>Population Calculation</h1>
+        <a href='./index.html' class="go_back btn">
+            Go Back
+        </a>
+        <p>Enter the following:</p>
+        <form>
+            <div class="items">
+            <label for="number">Current Population:</label>
+            <input type="number" id="currentPopulation" class=""> 
+        </div>
+    
+        <div class="items">
+            <label for="number">Final Population:</label>
+            <input type="number" id="finalPopulation">
+        </div>
+    
+        <div class="items">
+            <label for="number">Initial Time:</label>
+            <input type="number" id="initialTime">
+         </div>
+    
+            <div class="items">
+            <label for="number">Current Time:</label>
+            <input type="number" id="currentTime"> 
+        </div>
+    
+            <div class="items">
+            <label for="number">Final Time:</label>
+            <input type="number" id="finalTime">
+         </div>
+        </form>
+        <label>Please choose a unit:</label>
+    <select id="user-unit">
+        <option value="People/s">People</option>
+        <option value="Animal/s">Animal</option>
+        <option value="Bacteria/s">Bacteria</option>
+    </select>
+    
+        <br> <br>
+        <button type="submit" onclick="print()" >Submit</button>
+        
+
+        
+        <p id="answer"></p>
+        <p id="kValue"></p>
+        <p id="cValue"></p>
+
+        <p id="solution"></p>
+        <P id="solutionline1"></P>
+        <p id="solutionline2"></p>
+        <P id="solutionline3"></P>
+        <p id="solutionline4"></p>
+
+        <P id="csolution"></P>
+        <p id="solutionline5"></p>
+        <p id="solutionline6"></p>
+        <p id="solutionline7"></p>
+        
+
+
+        <script>
+            const curPop1 = document.getElementById("currentPopulation");
+            const finPop1 = document.getElementById("finalPopulation");
+            const iniTime1 = document.getElementById("initialTime1");
+            const curTime1 = document.getElementById("currentTime");
+            const finTime1 = document.getElementById("finalTime");
+
+            function print() {
+                let resultK = Math.log(finPop1.value/curPop1.value) / (finTime1.value-curTime1.value);
+                let convalue = curPop1.value / Math.exp(resultK*curTime1.value ) ;
+                let userUnit = document.getElementById("user-unit").value;
+
+                document.getElementById("answer").innerHTML = "Final Answer:";
+                document.getElementById("kValue").innerHTML = "K=" + resultK.toPrecision(4);
+                document.getElementById("cValue").innerHTML = "C=" + convalue.toPrecision(4) + " " + userUnit;
+
+                document.getElementById("solution").innerHTML = "Solution for K";
+                document.getElementById("solutionline1").innerHTML = "K= ln (P2/P1)/t2-t1";
+                document.getElementById("solutionline2").innerHTML = "K= ln("+finPop1.value+"/"+curPop1.value+")/"+finTime1.value+curTime1.value;
+                document.getElementById("solutionline3").innerHTML = "K= "+Math.log(+finPop1.value)+"/"+curPop1.value+"/"+finTime1.value+"-"+curTime1.value;
+                document.getElementById("solutionline4").innerHTML = "K= " + resultK.toPrecision(4);
+
+                document.getElementById("csolution").innerHTML = "Solution for C";
+                document.getElementById("solutionline5").innerHTML = "C= P/e<sub>k*t</sub>";
+                document.getElementById("solutionline6").innerHTML = "C="+curPop1.value+"/"+Math.exp(resultK.value*curTime1.value);
+                document.getElementById("solutionline7").innerHTML = "C= "+Math.round(convalue) +" " + userUnit;
+
+
+
+            }
+
+
+
+        </script>
+    </body>
+    </html>

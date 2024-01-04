@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./future_population.css" />
+    <link rel="stylesheet" href="./css/bootstrap.css" />
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
+    
+    <title>Future Population</title>
+</head>
+<body>
+    <div class="population_wrapper">
+        <div class="population_content">
+          
+          <h1>Population Calculation</h1>
+          <a href="./index.html" class="go_back btn"> Go Back </a>
+  
+          <p>Enter the following:</p>
+    
+        <form>
+        
+        <div class="items">
+            <label for="initialPopulation">Initial Population:</label>
+            <input type="number" id="initialPopulation" /> <br />
+          </div> 
+
+        <div class="items">
+            <label for="currentPopulation">Current Population:</label>
+            <input type="number" id="currentPopulation" /> <br />
+          </div>
+
+          <div class="items">
+            <label for="initialTime">Initial Time:</label>
+            <input type="number" id="initialTime" /> <br />
+          </div>
+
+          <div class="items">
+            <label for="currentTime">Current Time:</label>
+            <input type="number" id="currentTime" /> <br />
+          </div>
+
+          <div class="items">
+            <label for="finalTime">Final Time:</label>
+            <input type="number" id="finalTime" /> <br />
+          </div>          
+
+    </form>
+    <label> Please select unit value:</label>
+    <select id="user-unit">
+        <option value="People">People</option>
+        <option value="Animal">Animal</option>
+        <option value="Bacteria">Bacteria</option>
+    </select>
+        <br> <br>
+        <button onclick="print()"> SOLVE</button>
+
+        <p id="explanationline1"></p>
+        <p id="explanationline2"></p>
+        <p id="explanationline3"></p>
+        <p id="explanationline4"></p>
+
+        <br>
+        <p id="solutionline1"></p>
+        <p id="solutionline2"></p>
+        <p id="solutionline3"></p>
+
+        <br>
+
+        <p id="solutionline4"></p>
+        <p id="solutionline5"></p>
+        <p id="solutionline6"></p>
+        <p id="solutionline7"></p>
+
+        <br>
+
+        <p id="solutionline8"></p>
+        <p id="solutionline9"></p>
+        <p id="solutionline10"></p>
+
+
+
+        
+    <script href="script.js">
+        const iniPop1 = document.getElementById("initialPopulation");
+        const curPop1 = document.getElementById("currentPopulation");
+        const iniTime1 = document.getElementById("initialTime");
+        const curTime1 = document.getElementById("currentTime");
+        const finTime1 = document.getElementById("finalTime");
+        
+        
+
+        function print() { 
+        
+            let futPopC = iniPop1.value;   
+            let futPopK = (Math.log(curPop1.value/futPopC)/curTime1.value).toPrecision(4);
+            let futPop = futPopC*Math.exp(futPopK*finTime1.value).toPrecision(8);
+            let selectvalue = document.getElementById("Bacteria");
+            
+            var userUnit = document.getElementById("user-unit").value;
+
+
+            document.getElementById("explanationline1").innerHTML = "Given Values:";
+            document.getElementById("explanationline2").innerHTML = "P<sub>initial</sub>= " + iniPop1.value +", t<sub>initial</sub>= " + iniTime1.value;
+            document.getElementById("explanationline3").innerHTML = "P<sub>current</sub>= " + curPop1.value +", t<sub>current</sub>= " + curTime1.value;
+            document.getElementById("explanationline4").innerHTML = "P<sub>future</sub>= ? , t<sub>final</sub>= " + curTime1.value;
+
+            
+            document.getElementById("solutionline1").innerHTML = "Constant(c) = Population(p) / e<sup>(G/D Rate(k) x Time(t)</sup>)";
+            document.getElementById("solutionline2").innerHTML = "Constant(c) = " + iniPop1.value + "/e<sup>k*" + iniTime1.value + "</sup>" ;
+            document.getElementById("solutionline3").innerHTML = "Constant(c) = "+ futPopC;
+
+            document.getElementById("solutionline4").innerHTML = "G/D Rate(k) = ln(Population(p)/(Constant(c)) / Time(t))";
+            document.getElementById("solutionline5").innerHTML = "G/D Rate(k) = ln("+curPop1.value+"/"+futPopC+")/"+curTime1.value;
+            document.getElementById("solutionline6").innerHTML = "G/D Rate(k) = "+ Math.log(curPop1.value/futPopC).toPrecision(8)+"/"+curTime1.value;
+            document.getElementById("solutionline7").innerHTML = "G/D Rate(k) = "+ futPopK;
+        
+            document.getElementById("solutionline8").innerHTML = "Population(P) = Constant(c) * e<sup>G/D Rate(k) x Time(t)</sup>";
+            document.getElementById("solutionline9").innerHTML = "Population(p) = "+ futPopC + "e<sup>" + futPopK +"*"+ finTime1.value + "</sup>";
+            document.getElementById("solutionline10").innerHTML = "Population(p) = " + futPop.toPrecision(8) +" "+ userUnit;
+        }
+    </script>
+        </div>
+    </div>
+    
+</body>
+
+</html>
