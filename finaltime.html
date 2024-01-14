@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./final_time.css" />
+    <link rel="stylesheet" href="./css/bootstrap.css" />
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
+
+    <title>Final Time</title>
+</head>
+<body>
+
+    <div class="time_wrapper">
+        <div class="time_content">
+
+            <h1>Time Calculation</h1>
+            <a href='./index.html'>
+                <button class="go_back btn">Go Back</button> <br>
+            </a>
+    
+            <p>Enter the following:</p> <br>
+        <form>
+        <div class="items">
+            <label for="initialPopulation">Initial Population:</label>
+            <input type="number" id="initialPopulation"> <br>
+        </div>
+
+        <div class="items">
+            <label for="currentPopulation">Current Population:</label>
+            <input type="number" id="currentPopulation"> <br>
+        </div>
+
+        <div class="items">
+            <label for="futurePopulation">Future Population:</label>
+            <input type="number" id="futurePopulation"> <br>
+        </div>
+
+        <div class="items">
+            <label for="initialTime">Initial Time:</label> 
+            <input type="number" id="initialTime"> <br>
+        </div>
+
+       <div class="items">
+            <label for="currentTime">Current </label>
+            <input type="number" id="currentTime"> <br>
+       </div>
+    
+    </form>
+    <label>Please select a unit value:</label>
+    <select id="user-unit-select" class="select-time">
+        <option value="second/s">Second</option>
+        <option value="minute/s">Minute</option>
+        <option value="hour/s">Hour</option>
+        <option value="day/s">Day</option>
+        <option value="year/s">Year</option>
+    </select>
+    <label> Convert to:</label>
+    <select id="unit-convert">
+        <option value="default">None</option>
+        <option value="second/s">Second</option>
+        <option value="minute/s">Minute</option>
+        <option value="hour/s">Hour</option>
+        <option value="day/s">Day</option>
+        <option value="year/s">Year</option>
+    </select>
+
+    <button onclick="print(); check()" class="btn btn-primary mt-3"> SOLVE</button>
+        
+        <br>
+        <p id="given-value1"></p>
+        <p id="given-value2"></p>
+        <p id="given-value3"></p>
+        <p id="given-value4"></p>
+        <br>
+        
+        <p id="solution1"></p>
+        <p id="solutionline1"></p>
+        <p id="solutionline2"></p>
+        <p id="solutionline3"></p> <br>
+
+        <p id="solution2"></p>
+        <p id="solutionline4"></p>
+        <p id="solutionline5"></p>
+        <p id="solutionline6"></p>
+        <p id="solutionline7"></p> <br>
+
+        <p id="solution3"></p> <br>
+        <p id="solutionline8"></p>
+        <p id="solutionline9"></p>
+        <p id="solutionline10"></p> 
+        <p id="solutionline11"></p>
+       
+
+    
+
+        
+    <script href="script.js">
+
+        const iniPop1 = document.getElementById("initialPopulation");
+        const curPop1 = document.getElementById("currentPopulation");
+        const futPop1 = document.getElementById("futurePopulation");
+        const iniTime1 = document.getElementById("initialTime");
+        const curTime1 = document.getElementById("currentTime"); 
+
+        function print() { 
+        
+            let finTimeC = iniPop1.value;   
+            let finTimeK = (Math.log(curPop1.value/finTimeC)/curTime1.value).toPrecision(4);
+            let finTime = (Math.log(futPop1.value/finTimeC)/finTimeK).toPrecision(4);
+            var userUnit = document.getElementById("user-unit-select").value;
+
+            document.getElementById("given-value1").innerHTML = "Given Values:";
+            document.getElementById("given-value2").innerHTML = "P<sub>initial</sub>= " + iniPop1.value +" , t<sub>initial</sub>= " + iniTime1.value;
+            document.getElementById("given-value3").innerHTML = "P<sub>current</sub>= " + curPop1.value +" , t<sub>current</sub>= " + curTime1.value;
+            document.getElementById("given-value4").innerHTML = "P<sub>future</sub>= " + futPop1.value + " , t<sub>final</sub>= ?";
+
+
+            document.getElementById("solution1").innerHTML = "Solution for C : ";
+            document.getElementById("solutionline1").innerHTML = "Constant(C) = P<sub>initial</sub> / e<sup>(G/DRate(k) x Time(t))</sup>";
+            document.getElementById("solutionline2").innerHTML = "Constant(C) = " + iniPop1.value + "/e<sup>" + "k x " + iniTime1.value + "</sup>";
+            document.getElementById("solutionline3").innerHTML = "Constant(C) = "+ iniPop1.value*Math.exp(finTimeK*iniTime1.value);
+
+            document.getElementById("solution2").innerHTML = "Solution for K : ";
+            document.getElementById("solutionline4").innerHTML = "G/D Rate(k) = ln(P<sub>current</sub>/(Constant(c)) / Time(t))";
+            document.getElementById("solutionline5").innerHTML = "G/D Rate(k) = ln("+curPop1.value+"/"+finTimeC+")/"+curTime1.value;
+            document.getElementById("solutionline6").innerHTML = "G/D Rate(k) = "+ (Math.log(curPop1.value/finTimeC)).toPrecision(4)+"/"+curTime1.value;
+            document.getElementById("solutionline7").innerHTML = "G/D Rate(k) = "+ finTimeK;
+
+            document.getElementById("solution3").innerHTML = "Solution for Final Time : ";
+            document.getElementById("solutionline8").innerHTML = "Final Time(t) = ln(P<sub>future</sub>) / Constant(C)) / G/DRate(k)";
+            document.getElementById("solutionline9").innerHTML = "Final Time(t) = ln(" + futPop1.value + " / " + finTimeC + ") / " + finTimeK;
+            document.getElementById("solutionline10").innerHTML = "Final Time(t) = " + Math.round(finTime) + " " + userUnit;
+
+            
+        }
+        
+        function check() {
+            let cvalue = iniPop1.value;
+            let kvalue = (Math.log(curPop1.value/cvalue)/curTime1.value).toPrecision(4);
+            let tfinalvalue = finTime = (Math.log(futPop1.value/cvalue)/kvalue).toPrecision(4);
+
+            var val = document.getElementById('user-unit-select').value;
+            var val1 = document.getElementById('unit-convert').value;
+            
+            if(val == "second/s" && val1 == "minute/s") {
+                document.getElementById("solutionline11").innerHTML = "Converted Value: " + (tfinalvalue/60).toPrecision(4) + " " + val1;       
+            }
+            else if(val == "second/s" && val1 == "hour/s") {
+                document.getElementById("solutionline11").innerHTML = "Converted Value: " + (tfinalvalue/3600).toPrecision(4) + " " + val1;       
+            }
+            else if(val == "second/s" && val1 == "day/s") {
+                document.getElementById("solutionline11").innerHTML = "Converted Value: " + (tfinalvalue/86400).toPrecision(10) + " " + val1;       
+            }
+            else if(val == "second/s" && val1 == "year/s") {
+                document.getElementById("solutionline11").innerHTML = "Converted Value: " + (tfinalvalue/31536000).toPrecision(15) + " " + val1;       
+            }
+
+
+            else if(val == "minute/s" && val1 == "second/s") {
+                document.getElementById("solutionline11").innerHTML = "Converted Value: " + (tfinalvalue*60).toPrecision(4) + " " + val1;       
+            }
+            else if(val == "minute/s" && val1 == "hour/s") {
+                document.getElementById("solutionline11").innerHTML = "Converted Value: " + (tfinalvalue/60).toPrecision(4) + " " + val1;       
+            }
+            else if(val == "minute/s" && val1 == "day/s") {
+                document.getElementById("solutionline11").innerHTML = "Converted Value: " + (tfinalvalue/1440).toPrecision(10) + " " + val1;       
+            }
+            else if(val == "minute/s" && val1 == "year/s") {
+                document.getElementById("solutionline11").innerHTML = "Converted Value: " + (tfinalvalue/525600).toPrecision(15) + " " + val1;       
+            }
+
+
+            else if(val == "hour/s" && val1 == "second/s") {
+                document.getElementById("solutionline11").innerHTML = "Converted Value: " + (tfinalvalue*60*60).toPrecision(4) + " " + val1;       
+            }
+            else if(val == "hour/s" && val1 == "minute/s") {
+                document.getElementById("solutionline11").innerHTML = "Converted Value: " + (tfinalvalue*60).toPrecision(4) + " " + val1;       
+            }
+            else if(val == "hour/s" && val1 == "day/s") {
+                document.getElementById("solutionline11").innerHTML = "Converted Value: " + (tfinalvalue/24).toPrecision(4) + " " + val1;       
+            }
+            else if(val == "hour/s" && val1 == "year/s") {
+                document.getElementById("solutionline11").innerHTML = "Converted Value: " + (tfinalvalue/8760).toPrecision(10) + " " + val1;       
+            }
+
+            else if(val == "day/s" && val1 == "second/s") {
+                document.getElementById("solutionline11").innerHTML = "Converted Value: " + (tfinalvalue*86400).toPrecision(10) + " " + val1;       
+            }
+            else if(val == "day/s" && val1 == "minute/s") {
+                document.getElementById("solutionline11").innerHTML = "Converted Value: " + (tfinalvalue*1440).toPrecision(5) + " " + val1;       
+            }
+            else if(val == "day/s" && val1 == "hour/s") {
+                document.getElementById("solutionline11").innerHTML = "Converted Value: " + (tfinalvalue*24).toPrecision(4) + " " + val1;       
+            }
+            else if(val == "day/s" && val1 == "year/s") {
+                document.getElementById("solutionline11").innerHTML = "Converted Value: " + (tfinalvalue/365).toPrecision(4) + " " + val1;       
+            }
+
+
+            else if(val == "year/s" && val1 == "second/s") {
+                document.getElementById("solutionline11").innerHTML = "Converted Value: " + (tfinalvalue*31536000).toPrecision(15) + " " + val1;       
+            }
+            else if(val == "year/s" && val1 == "minute/s") {
+                document.getElementById("solutionline11").innerHTML = "Converted Value: " + (tfinalvalue*525600).toPrecision(10) + " " + val1;       
+            }
+            else if(val == "year/s" && val1 == "hour/s") {
+                document.getElementById("solutionline11").innerHTML = "Converted Value: " + (tfinalvalue*8760).toPrecision(5) + " " + val1;       
+            }
+            else if(val == "year/s" && val1 == "day/s") {
+                document.getElementById("solutionline11").innerHTML = "Converted Value: " + (tfinalvalue*365).toPrecision(4) + " " + val1;       
+            }
+
+
+
+
+
+        }
+        
+    </script>
+    </div>
+</div>
+</body>
+</html>
