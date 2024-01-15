@@ -124,6 +124,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 90vh;
+    background-color: gray;
 }
 .main_selection{
     padding: 10px;
